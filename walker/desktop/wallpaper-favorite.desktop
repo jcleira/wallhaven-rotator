@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wallpaper: Favorite
+Comment=Save the current wallpaper into favorites
+Exec=wallhaven-rotator favorite
+Icon=starred
+Terminal=false
+Categories=Utility;
+Keywords=wallpaper;favorite;save;

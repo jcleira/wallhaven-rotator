@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wallpaper: Status
+Comment=Show rotation status as a notification
+Exec=sh -c 'notify-send -i image-x-generic "Wallpaper status" "$(wallhaven-rotator status)"'
+Icon=dialog-information
+Terminal=false
+Categories=Utility;
+Keywords=wallpaper;status;

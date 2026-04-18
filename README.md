@@ -77,19 +77,35 @@ login.
 
 ## Walker integration
 
-Ship [`walker/wallpaper-menu.sh`](./walker/wallpaper-menu.sh) on your PATH and
-bind it to a Hyprland keybind:
+Two ways to drive the rotator from Walker:
+
+**1. Direct entries in the default launcher.** The [`walker/desktop/`](./walker/desktop/)
+directory ships `.desktop` files for each action (`next`, `favorite`,
+`unfavorite`, `mode daily`, `mode favorites`, `info`, `open`, `status`,
+plus a top-level "Wallpaper" submenu entry). Symlink them into
+`~/.local/share/applications/` and they'll appear when you type
+"wallpaper" into Walker:
+
+```bash
+for f in ~/Code/wallhaven-rotator/walker/desktop/*.desktop; do
+    ln -sf "$f" ~/.local/share/applications/
+done
+update-desktop-database ~/.local/share/applications
+```
+
+**2. Dedicated dmenu keybind.** [`walker/wallpaper-menu.sh`](./walker/wallpaper-menu.sh)
+opens Walker in dmenu mode with just the rotator actions. Symlink it onto
+your PATH and bind to a Hyprland shortcut:
 
 ```
 # ~/.config/hypr/conf/keybinds.conf
-bind = SUPER, W, exec, wallpaper-menu.sh
+bind = SUPER ALT,   W, exec, wallpaper-menu
 bind = SUPER SHIFT, W, exec, wallhaven-rotator next
-bind = SUPER CTRL, W, exec, wallhaven-rotator favorite
+bind = SUPER CTRL,  W, exec, wallhaven-rotator favorite
 ```
 
-The script pipes an action list into `walker --dmenu` and dispatches to
-`wallhaven-rotator`. Notifications (via `notify-send` / `mako`) surface
-results.
+Notifications (via `notify-send` / `mako`) surface results so you don't
+need a terminal open.
 
 ## License
 

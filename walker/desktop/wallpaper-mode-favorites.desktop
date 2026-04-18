@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wallpaper: Mode Favorites
+Comment=Rotate saved favorites only
+Exec=wallhaven-rotator mode favorites
+Icon=starred
+Terminal=false
+Categories=Utility;
+Keywords=wallpaper;mode;favorites;

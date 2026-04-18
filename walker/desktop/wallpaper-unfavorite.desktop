@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wallpaper: Unfavorite
+Comment=Remove the current wallpaper from favorites
+Exec=wallhaven-rotator unfavorite
+Icon=non-starred
+Terminal=false
+Categories=Utility;
+Keywords=wallpaper;unfavorite;remove;

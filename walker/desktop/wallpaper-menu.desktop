@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wallpaper
+Comment=Open wallpaper action menu
+Exec=wallpaper-menu
+Icon=image-x-generic
+Terminal=false
+Categories=Utility;
+Keywords=wallpaper;background;rotator;wallhaven;

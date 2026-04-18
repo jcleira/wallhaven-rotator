@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wallpaper: Next
+Comment=Fetch and apply a fresh wallpaper from Wallhaven
+Exec=wallhaven-rotator next
+Icon=image-x-generic
+Terminal=false
+Categories=Utility;
+Keywords=wallpaper;next;rotate;wallhaven;

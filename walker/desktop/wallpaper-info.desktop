@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wallpaper: Info
+Comment=Show the current wallpaper metadata as a notification
+Exec=sh -c 'notify-send -i image-x-generic "Wallpaper info" "$(wallhaven-rotator info)"'
+Icon=dialog-information
+Terminal=false
+Categories=Utility;
+Keywords=wallpaper;info;metadata;
