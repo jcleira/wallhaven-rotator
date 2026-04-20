@@ -2,7 +2,7 @@
 Type=Application
 Name=Wallpaper: Unfavorite
 Comment=Remove the current wallpaper from favorites
-Exec=wallhaven-rotator unfavorite
+Exec=sh -c "PATH=\$HOME/Code/go/bin:\$HOME/go/bin:\$HOME/.local/bin:\$PATH exec wallhaven-rotator unfavorite"
 Icon=non-starred
 Terminal=false
 Categories=Utility;

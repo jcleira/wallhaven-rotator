@@ -2,7 +2,7 @@
 Type=Application
 Name=Wallpaper: Status
 Comment=Show rotation status as a notification
-Exec=sh -c 'notify-send -i image-x-generic "Wallpaper status" "$(wallhaven-rotator status)"'
+Exec=sh -c "PATH=\$HOME/Code/go/bin:\$HOME/go/bin:\$HOME/.local/bin:\$PATH; notify-send -i image-x-generic 'Wallpaper status' \"\$(wallhaven-rotator status)\""
 Icon=dialog-information
 Terminal=false
 Categories=Utility;

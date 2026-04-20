@@ -2,7 +2,7 @@
 Type=Application
 Name=Wallpaper: Favorite
 Comment=Save the current wallpaper into favorites
-Exec=wallhaven-rotator favorite
+Exec=sh -c "PATH=\$HOME/Code/go/bin:\$HOME/go/bin:\$HOME/.local/bin:\$PATH exec wallhaven-rotator favorite"
 Icon=starred
 Terminal=false
 Categories=Utility;

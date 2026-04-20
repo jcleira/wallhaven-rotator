@@ -2,7 +2,7 @@
 Type=Application
 Name=Wallpaper
 Comment=Open wallpaper action menu
-Exec=wallpaper-menu
+Exec=sh -c "PATH=\$HOME/Code/go/bin:\$HOME/go/bin:\$HOME/.local/bin:\$PATH exec wallpaper-menu"
 Icon=image-x-generic
 Terminal=false
 Categories=Utility;

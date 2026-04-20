@@ -2,7 +2,7 @@
 Type=Application
 Name=Wallpaper: Mode Favorites
 Comment=Rotate saved favorites only
-Exec=wallhaven-rotator mode favorites
+Exec=sh -c "PATH=\$HOME/Code/go/bin:\$HOME/go/bin:\$HOME/.local/bin:\$PATH exec wallhaven-rotator mode favorites"
 Icon=starred
 Terminal=false
 Categories=Utility;

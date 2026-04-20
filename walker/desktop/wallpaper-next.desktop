@@ -2,7 +2,7 @@
 Type=Application
 Name=Wallpaper: Next
 Comment=Fetch and apply a fresh wallpaper from Wallhaven
-Exec=wallhaven-rotator next
+Exec=sh -c "PATH=\$HOME/Code/go/bin:\$HOME/go/bin:\$HOME/.local/bin:\$PATH exec wallhaven-rotator next"
 Icon=image-x-generic
 Terminal=false
 Categories=Utility;

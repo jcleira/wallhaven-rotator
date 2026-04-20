@@ -2,7 +2,7 @@
 Type=Application
 Name=Wallpaper: Open on Wallhaven
 Comment=Open the current wallpaper's source page in the browser
-Exec=wallhaven-rotator open
+Exec=sh -c "PATH=\$HOME/Code/go/bin:\$HOME/go/bin:\$HOME/.local/bin:\$PATH exec wallhaven-rotator open"
 Icon=applications-internet
 Terminal=false
 Categories=Utility;

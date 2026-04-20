@@ -2,7 +2,7 @@
 Type=Application
 Name=Wallpaper: Mode Daily
 Comment=Rotate a fresh Wallhaven pick each day
-Exec=wallhaven-rotator mode daily
+Exec=sh -c "PATH=\$HOME/Code/go/bin:\$HOME/go/bin:\$HOME/.local/bin:\$PATH exec wallhaven-rotator mode daily"
 Icon=image-x-generic
 Terminal=false
 Categories=Utility;

@@ -10,6 +10,11 @@
 
 set -euo pipefail
 
+# Hyprland keybinds and Walker spawn us with a minimal session PATH that
+# doesn't include the user's Go bin or ~/.local/bin. Prepend them so both
+# `wallhaven-rotator` and `walker` are findable regardless of caller.
+export PATH="$HOME/Code/go/bin:$HOME/go/bin:$HOME/.local/bin:$PATH"
+
 BIN=${WALLHAVEN_ROTATOR:-wallhaven-rotator}
 NOTIFY=${NOTIFY:-notify-send}
 ICON=${WALLHAVEN_ICON:-image-x-generic}

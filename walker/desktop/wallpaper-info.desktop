@@ -2,7 +2,7 @@
 Type=Application
 Name=Wallpaper: Info
 Comment=Show the current wallpaper metadata as a notification
-Exec=sh -c 'notify-send -i image-x-generic "Wallpaper info" "$(wallhaven-rotator info)"'
+Exec=sh -c "PATH=\$HOME/Code/go/bin:\$HOME/go/bin:\$HOME/.local/bin:\$PATH; notify-send -i image-x-generic 'Wallpaper info' \"\$(wallhaven-rotator info)\""
 Icon=dialog-information
 Terminal=false
 Categories=Utility;
