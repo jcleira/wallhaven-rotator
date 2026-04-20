@@ -15,6 +15,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/jcleira/wallhaven-rotator/internal/apply"
 	"github.com/jcleira/wallhaven-rotator/internal/config"
 	"github.com/jcleira/wallhaven-rotator/internal/favorites"
 	"github.com/jcleira/wallhaven-rotator/internal/history"
@@ -302,19 +303,35 @@ func cmdStatus() error {
 }
 
 func cmdDaemon(ctx context.Context) error {
-	state, err := config.LoadState()
+	cfg, state, store, err := bootstrap()
 	if err != nil {
 		return err
 	}
-	today := time.Now().Format("2006-01-02")
-	if state.LastRotatedDate == today {
-		return nil // already rotated today, silent no-op
+	defer store.Close()
+
+	if err := apply.WaitReady(ctx, cfg.Apply); err != nil {
+		fmt.Fprintf(os.Stderr, "wallhaven-rotator daemon: backend wait: %v\n", err)
 	}
-	// Delegate to the normal next path, but swallow network errors so
-	// offline boots don't fail autostart.
-	if err := cmdNext(ctx); err != nil {
-		fmt.Fprintf(os.Stderr, "wallhaven-rotator daemon: rotation skipped: %v\n", err)
+
+	today := time.Now().Format("2006-01-02")
+	if state.LastRotatedDate != today {
+		id, path, err := rotate.Next(ctx, cfg, state, store)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "wallhaven-rotator daemon: rotation skipped: %v\n", err)
+		} else {
+			fmt.Printf("applied %s\n%s\n", id, path)
+			return nil
+		}
+	}
+
+	// Re-apply the last-known wallpaper so it survives session restarts.
+	// Without this, awww-daemon starts empty and the screen stays black
+	// whenever the daemon's only job today is a no-op rotation check.
+	if state.CurrentWallpaper == "" {
 		return nil
+	}
+	if err := apply.Set(cfg.Apply, state.CurrentWallpaper); err != nil {
+		fmt.Fprintf(os.Stderr, "wallhaven-rotator daemon: re-apply failed: %v\n", err)
 	}
 	return nil
 }

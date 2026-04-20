@@ -2,9 +2,11 @@
 package apply
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"os/exec"
+	"time"
 
 	"github.com/jcleira/wallhaven-rotator/internal/config"
 )
@@ -21,6 +23,35 @@ func Set(cfg config.Apply, imagePath string) error {
 	default:
 		return fmt.Errorf("unknown apply command %q (expected awww|swww|hyprpaper)", cfg.Command)
 	}
+}
+
+// WaitReady polls the wallpaper backend until it answers a query or the
+// context/deadline ends. Autostart fires awww-daemon and this rotator in
+// parallel, so the rotator has to wait for the socket before it can apply.
+func WaitReady(ctx context.Context, cfg config.Apply) error {
+	bin := cfg.Command
+	if bin == "" {
+		bin = "awww"
+	}
+	if bin == "hyprpaper" {
+		return nil
+	}
+	deadline := time.Now().Add(15 * time.Second)
+	const pause = 250 * time.Millisecond
+	var lastErr error
+	for time.Now().Before(deadline) {
+		if err := exec.CommandContext(ctx, bin, "query").Run(); err == nil {
+			return nil
+		} else {
+			lastErr = err
+		}
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		case <-time.After(pause):
+		}
+	}
+	return fmt.Errorf("backend %q not ready within 15s: %v", bin, lastErr)
 }
 
 func setAwww(cfg config.Apply, p string) error {
